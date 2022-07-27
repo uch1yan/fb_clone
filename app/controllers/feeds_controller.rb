@@ -1,5 +1,6 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: %i[ show edit update destroy ]
+  before_action :set_feed, only: [:show, :edit, :update, :destroy ]
+  before_action :authenticate_user, only: [:edit, :update, :destroy ]
 
   # GET /feeds or /feeds.json
   def index
@@ -12,7 +13,11 @@ class FeedsController < ApplicationController
 
   # GET /feeds/new
   def new
-    @feed = Feed.new
+    if params[:back]
+      @feed = Feed.new(feed_params)
+    else
+      @feed = Feed.new
+    end
   end
 
   # GET /feeds/1/edit
@@ -21,7 +26,8 @@ class FeedsController < ApplicationController
 
   # POST /feeds or /feeds.json
   def create
-    @feed = Feed.new(feed_params)
+    @feed = current_user.feed.build(feed_params)
+  end 
 
     respond_to do |format|
       if @feed.save
@@ -47,6 +53,10 @@ class FeedsController < ApplicationController
     end
   end
 
+  def confirm
+    @blog = current_user.blogs.build(blog_params)
+    render :new if @blog.invalid?
+  end
   # DELETE /feeds/1 or /feeds/1.json
   def destroy
     @feed.destroy
