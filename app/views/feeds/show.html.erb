@@ -1,9 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="wrapper">
+  <h1>詳細ページ</h1>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @feed.image.url %>
-</p>
+  <p>
+    <strong>コメント:</strong>
+    <%= @feed.content %>
+  </p>
 
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
-<%= link_to 'Back', feeds_path %>
+  <p>
+    <strong>Image:</strong>
+    <%= image_tag @feed.image.url %>
+  </p>
+
+  <p class="index"><%= link_to "投稿一覧に戻る", feeds_path %></p>
+  <% if @feed.user == current_user %>
+    <p><%= link_to '編集する', edit_feed_path(@feed) %></p>
+  <% end %>
+  <%= link_to 'Back', feeds_path %>
+</div>

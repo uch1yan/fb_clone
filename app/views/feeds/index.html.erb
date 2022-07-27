@@ -1,14 +1,30 @@
-<p style="color: green"><%= notice %></p>
+<div class="wrapper">
+  <p style="color: green"><%= notice %></p>
+  <h1>投稿一覧</h1>
 
-<h1>Feeds</h1>
+  <table>
+    <table-head>
+      <tr>
+        <th>投稿者</th>
+        <th>コメント</th>
+        <th>画像</th>
+      </tr>
+    </table-head>
 
-<div id="feeds">
-  <% @feeds.each do |feed| %>
-    <%= render feed %>
-    <p>
-      <%= link_to "Show this feed", feed %>
-    </p>
-  <% end %>
-</div>
+    <table-body>
+      <% @feeds.each do |feed| %>
+      <tr>
+        <td><%= feed.user.name %></td>
+        <td><%= feed.content %></td>
+        <td><%= image_tag feed.image_url(:thumb) if feed.image.present? %></td>
+
+        <% if feed.user == current_user %>
+          <td><%= link_to '編集', edit_feed_path %></td>
+          <td><%= link_to '削除', feed, method: :delete, data: { confirm: 'Are you okay?' } %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </table-body>
+  </table>
 
 <%= link_to "New feed", new_feed_path %>
