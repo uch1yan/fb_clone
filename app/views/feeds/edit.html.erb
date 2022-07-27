@@ -1,10 +1,10 @@
-<h1>Editing feed</h1>
+<%= form_with(model: @feed, local: true) do |form| %>
+  <div class="wrapper">
+    <h1>編集ページ</h1>
+  </div>
+  
+    <%= render "form", feed: @feed %>
 
-<%= render "form", feed: @feed %>
+    <br>
 
-<br>
-
-<div>
-  <%= link_to "Show this feed", @feed %> |
-  <%= link_to "Back to feeds", feeds_path %>
-</div>
+  <p class="btn-post"><%= link_to "投稿一覧に戻る", feeds_path %></p>

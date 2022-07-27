@@ -1,9 +1,10 @@
-<div class = "wrapper">
-  <h1>新規投稿</h1>
+<%= form_with(model: @feedm local: true) do |form| %>
+  <div class = "wrapper">
+    <h1>新規投稿</h1>
+  </div>
 
   <%= render "form", feed: @feed %>
 
   <br>
 
   <%= link_to "投稿一覧へ戻る", feeds_path %>
-</div>
