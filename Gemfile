@@ -53,7 +53,11 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
   gem 'bcrypt'
-  
+
+  gem 'mini_magick'
+
+  gem 'carrierwave'
+
 end
 
 group :development do
