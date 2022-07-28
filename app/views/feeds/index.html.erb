@@ -5,26 +5,25 @@
   <table>
     <table-head>
       <tr>
-        <th>投稿者</th>
-        <th>コメント</th>
-        <th>画像</th>
+        <th class="pt-3 pb-3 px-5">投稿者</th>
+        <th class="pt-3 pb-3 px-5">コメント</th>
+        <th class="pt-3 pb-3 px-5">画像</th>
       </tr>
     </table-head>
 
     <table-body>
       <% @feeds.each do |feed| %>
       <tr>
-        <td><%= feed.user.name %></td>
-        <td><%= feed.content %></td>
-        <td><%= image_tag feed.image_url if feed.image.present? %></td>
-
-        <% if feed.user == current_user %>
-          <td><%= link_to '編集', edit_feed_path(feed) %></td>
-          <td><%= link_to '削除', feed, method: :delete, data: { confirm: 'Are you okay?' } %></td>
-        <% end %>
+        <td class="pt-3 pb-3 px-5"><%= feed.user.name %></td>
+        <td class="pt-3 pb-3 px-5"><%= feed.content %></td>
+        <td class="pt-3 pb-3 px-5">><%= image_tag feed.image_url(:thumb) %></td>
+        <td><%= link_to '編集', edit_feed_path(feed) %></td>
+        <td><%= button_to '削除', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     </table-body>
   </table>
 
-<%= link_to "新規投稿ページへ", new_feed_path %>
+  <div class="mt-5">
+    <button type="button" class="btn btn-info"><%= link_to '新規投稿ページへ', new_feed_path %></button>
+  </div>

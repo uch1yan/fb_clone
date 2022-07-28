@@ -12,9 +12,6 @@
     <%= image_tag @feed.image.url %>
   </p>
 
-  <p class="index"><%= link_to "投稿一覧に戻る", feeds_path %></p>
-  <% if @feed.user == current_user %>
-    <p><%= link_to '編集する', edit_feed_path(@feed) %></p>
-  <% end %>
-  <%= link_to 'Back', feeds_path %>
+  <p><%= link_to "投稿一覧に戻る", feeds_path %></p>
+  <p><%= link_to '編集する', edit_feed_path(@feed) %></p>
 </div>
